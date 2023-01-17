@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"gtk/cmd/characters"
-	"gtk/cmd/utils"
 	"gtk/cmd/weapon"
 	"log"
 
+	"github.com/gotk3/gotk3/cairo"
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 )
@@ -36,12 +36,27 @@ func main() {
 	obj, _ = b.GetObject("fix")
 	game := obj.(*gtk.Fixed)
 
-	utils.FixedImageByName(b, "wall", 3, "../../../Downloads/wall.png")
+	obj, err = b.GetObject("gl-area-1")
+	if err != nil {
+		log.Fatal("Ошибка:", err)
+	}
+	area := obj.(*gtk.GLArea)
 
-	frag := characters.NewFrag(11, 11, 5, 30, 30, "../../../Downloads/frag.png", game)
+	area.Connect("button-press-event", func(da *gtk.GLArea, cr *cairo.Context) {
+		cr.Rectangle(1, 1, 10, 10)
+		r, _ := cairo.RegionCreate()
+		r.ContainsPoint(1, 5)
+		da.QueueDrawRegion(r)
+		da.AttachBuffers()
+		fmt.Println(cr.GetCurrentPoint())
+	})
+	area.ShowAll()
+
+	frag := characters.NewFrag(11, 11, 5, 30, 30, "./img/frag.png", game)
 	frag.P.Render()
-	usr := characters.NewHero(1, 1, 10, 5, 5, "../../../Downloads/usr.png", game)
+	usr := characters.NewHero(1, 1, 10, 5, 5, "./img/usr.png", game)
 	usr.P.Render()
+
 	win.Connect("key-press-event", func(tree *gtk.EventBox, ev *gdk.Event) {
 		usr.TakeDamage(characters.Frag(*frag), func() {
 			fmt.Println("TAKE DAMAGE!!!!", usr.Life)
@@ -73,7 +88,7 @@ func main() {
 		btn := gdk.EventButtonNewFromEvent(ev)
 		switch btn.Button() {
 		case gdk.BUTTON_PRIMARY:
-			usr.Attack(int(btn.X()), int(btn.Y()), *weapon.NewArraw("../../../Downloads/fireball.png"))
+			usr.Attack(int(btn.X()), int(btn.Y()), *weapon.NewArraw("./img/fireball.png"))
 			return true
 		case gdk.BUTTON_MIDDLE:
 			fmt.Println("middle-click detected!")

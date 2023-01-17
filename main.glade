@@ -19,42 +19,17 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <child>
-              <object class="GtkImage" id="wall-1">
-                <property name="width-request">20</property>
-                <property name="height-request">40</property>
+              <object class="GtkGLArea" id="gl-area-1">
+                <property name="width-request">121</property>
+                <property name="height-request">94</property>
                 <property name="visible">True</property>
+                <property name="app-paintable">True</property>
                 <property name="can-focus">False</property>
-                <property name="stock">gtk-missing-image</property>
+                <property name="use-es">True</property>
               </object>
               <packing>
-                <property name="x">98</property>
-                <property name="y">144</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkImage" id="wall-3">
-                <property name="width-request">24</property>
-                <property name="height-request">101</property>
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="stock">gtk-missing-image</property>
-              </object>
-              <packing>
-                <property name="x">104</property>
-                <property name="y">280</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkImage" id="wall-2">
-                <property name="width-request">25</property>
-                <property name="height-request">80</property>
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="stock">gtk-missing-image</property>
-              </object>
-              <packing>
-                <property name="x">105</property>
-                <property name="y">183</property>
+                <property name="x">169</property>
+                <property name="y">184</property>
               </packing>
             </child>
           </object>

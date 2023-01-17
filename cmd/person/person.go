@@ -98,7 +98,6 @@ func (p *Person) CheckCollision(somePerson utils.Pointers, callback func()) {
 		}
 	}
 }
-
 func (p *Person) Destroy() {
 	p.object.Destroy()
 }
